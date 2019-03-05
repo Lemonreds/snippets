@@ -27,7 +27,7 @@ console.log(addCurry2(3)(4)(5, 6))
 
 
 function add2(...params) {
-    console.log(params)
+    // console.log(params)
     return params.reduce((prev, current) => (
         prev + current
     ), 0)
@@ -36,8 +36,8 @@ function add2(...params) {
 function curry2(fn, args = []) {
 
     return (...params) => {
-        if (params.length === 0) return fn(...args, ...params)
-        else return curry2(fn, [...args, ...params])
+        if (params.length === 0) return fn(...args)
+        else return curry2(fn, args.concat(params))
     }
 
 }
@@ -46,3 +46,4 @@ let addCurry3 = curry2(add2)
 
 console.log(addCurry3(3, 4, 5, 6)())
 console.log(addCurry3(3)(4)())
+console.log(addCurry3(3)(6, 5)())
